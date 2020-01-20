@@ -85,6 +85,28 @@ router.get('/page/:page',function(req,res,next)
     });
 });
 
+router.post('/delete',function(req,res,next)
+{
+    var idx = req.body.idx;
+    var passwd = req.body.passwd;
+    var datas = [idx,passwd];
+
+
+    var sql = "delete from board where idx=? and passwd=?";
+    conn.query(sql,datas, function(err,result)
+    {
+        if(err) console.error(err);
+        if(result.affectedRows == 0)
+        {
+            res.send("<script>alert('패스워드가 일치하지 않습니다.');history.back();</script>");
+        }
+        else
+        {
+            res.redirect('/board/list/');
+        }
+    });
+});
+
 
 
 module.exports = router;

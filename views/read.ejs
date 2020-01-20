@@ -7,7 +7,7 @@
 <body>
 <h1><%= title %></h1>
 
-<form action="/board/update" method="post">
+<form method="post">
     <table border="1">
         <input type="hidden" name="idx" value="<%=row.idx%>"/>
         <tr>
@@ -40,8 +40,13 @@
         </tr>
         <tr>
             <td colspan="2">
-                <button type="submit">글 수정</button>
+                <input type="submit" value="수정" onclick="action='/board/update'">
+                <input type="submit" value="삭제" onclick="action='/board/delete'">
+
                 <a href="/board/list">목록</a>
+                <form action="/board/delete" method="post">
+                    <button type="submit">삭제</button>
+                </form>
             </td>
         </tr>
     </table>
