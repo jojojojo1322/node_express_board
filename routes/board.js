@@ -36,6 +36,17 @@ router.post('/write', function(req,res,next){
     });
 });
 
+router.get('/read/:idx',function(req,res,next)
+{
+    var idx = req.params.idx;
+    var sql = "select idx, name, title, content, date_format(modidate,'%Y-%m-%d %H:%i:%s') modidate, " +
+        "date_format(regdate,'%Y-%m-%d %H:%i:%s') regdate,hit from board where idx=?";
+    conn.query(sql,[idx], function(err,row)
+    {
+        if(err) console.error(err);
+        res.render('read', {title:"글 상세", row:row[0]});
+    });
+});
 
 
 module.exports = router;
